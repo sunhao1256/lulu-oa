@@ -1,0 +1,11 @@
+subprojects {
+    repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/central'
+        }
+        mavenCentral()
+    }
+}
+allprojects{
+    version '1.0'
+}

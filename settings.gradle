@@ -1,0 +1,6 @@
+rootProject.name = 'lulu-oa'
+include 'lulu-bom'
+include 'lulu-common'
+include 'lulu-api'
+include 'lulu-bpmn'
+

@@ -1,0 +1,12 @@
+plugins {
+    id 'java-platform'
+}
+javaPlatform.allowDependencies()
+
+dependencies {
+    api platform('org.springframework.boot:spring-boot-dependencies:2.7.3')
+    constraints{
+        api 'com.google.guava:guava:30.1-jre'
+        api 'org.camunda.bpm:camunda-engine-spring:7.18.0'
+    }
+}
