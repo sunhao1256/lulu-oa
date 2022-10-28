@@ -1,11 +1,7 @@
 plugins {
     id 'java'
-}
-
-group 'com.sh'
-
-repositories {
-    mavenCentral()
+    id 'java-library'
+    id "org.springframework.boot"
 }
 sourceSets {
     main {
@@ -21,8 +17,18 @@ sourceSets {
     }
 }
 dependencies {
+    implementation platform(project(':lulu-bom'))
+
+    implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest'
+    implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+    runtimeOnly 'mysql:mysql-connector-java'
+
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+bootJarMainClassName {
+
 }
 
 test {

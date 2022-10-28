@@ -4,9 +4,11 @@ plugins {
 javaPlatform.allowDependencies()
 
 dependencies {
-    api platform('org.springframework.boot:spring-boot-dependencies:2.7.3')
+    api platform("org.springframework.boot:spring-boot-dependencies:${libs.spring_boot}")
     constraints{
         api 'com.google.guava:guava:30.1-jre'
-        api 'org.camunda.bpm:camunda-engine-spring:7.18.0'
+        api "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest:${libs.camunda}"
+        api "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-external-task-client:${libs.camunda}"
+        api "org.camunda.community:camunda-engine-rest-client-complete-springboot-starter:${libs.camunda}"
     }
 }

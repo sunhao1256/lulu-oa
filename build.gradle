@@ -1,11 +1,16 @@
-subprojects {
+plugins{
+    id "org.springframework.boot" version "2.7.5" apply false
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE' apply false
+}
+allprojects{
+    group 'com.sh'
+    version '1.0'
+    apply from: "$rootProject.projectDir/dependencies.gradle"
+
     repositories {
         maven {
             url 'https://maven.aliyun.com/repository/central'
         }
         mavenCentral()
     }
-}
-allprojects{
-    version '1.0'
 }
