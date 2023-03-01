@@ -1,7 +1,5 @@
 plugins {
-    id 'java'
     id 'java-library'
-    id "org.springframework.boot"
 }
 sourceSets {
     main {
@@ -14,21 +12,22 @@ sourceSets {
         java {
             srcDirs = ['src/test/java']
         }
+        resources{
+            srcDirs = ['../lulu-api-server/src/main/resources']
+        }
+
     }
 }
 dependencies {
     implementation platform(project(':lulu-bom'))
 
-    implementation 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest'
+    api 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
     runtimeOnly 'mysql:mysql-connector-java'
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
-}
-
-bootJarMainClassName {
-
 }
 
 test {

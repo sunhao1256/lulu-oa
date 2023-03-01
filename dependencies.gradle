@@ -1,5 +1,4 @@
 ext.libs = [
     camunda : '7.18.0',
-    camunda_rest_client : '7.17.0',
     spring_boot : '2.7.3'
 ]

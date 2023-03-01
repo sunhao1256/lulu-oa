@@ -1,5 +1,5 @@
 plugins {
-    id 'java'
+    id 'java-library'
 }
 
 configurations {
@@ -13,4 +13,8 @@ dependencies {
     implementation 'com.google.guava:guava'
     implementation 'org.projectlombok:lombok'
     implementation 'org.apache.commons:commons-lang3'
+
+    annotationProcessor platform(project(':lulu-bom'))
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
 }

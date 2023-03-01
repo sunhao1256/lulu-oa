@@ -1,7 +1,6 @@
 plugins {
     id 'java'
     id "org.springframework.boot"
-    id "io.spring.dependency-management"
 }
 configurations {
     compileOnly {
@@ -10,15 +9,20 @@ configurations {
 }
 dependencies {
     implementation platform(project(':lulu-bom'))
+
+    implementation project(':lulu-common')
     implementation project(':lulu-auth')
+    implementation project(':lulu-bpmn')
 
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor platform(project(':lulu-bom'))
 
     implementation 'com.google.guava:guava'
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.camunda.community:camunda-engine-rest-client-complete-springboot-starter'
+
     runtimeOnly 'mysql:mysql-connector-java'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'

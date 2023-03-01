@@ -2,6 +2,6 @@ rootProject.name = 'lulu-oa'
 include 'lulu-bom'
 include 'lulu-common'
 include 'lulu-api-server'
-include 'lulu-bpmn-server'
+include 'lulu-bpmn'
 include 'lulu-auth'
 
