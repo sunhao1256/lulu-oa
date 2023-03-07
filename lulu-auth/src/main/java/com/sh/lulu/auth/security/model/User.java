@@ -14,7 +14,6 @@ import java.util.Set;
 @Table(name = "USER")
 public class User {
 
-   @JsonIgnore
    @Id
    @Column(name = "ID")
    @GeneratedValue(strategy = GenerationType.AUTO, generator = "USER_SEQ")
@@ -47,7 +46,6 @@ public class User {
    @Size(min = 4, max = 50)
    private String email;
 
-   @JsonIgnore
    @Column(name = "ACTIVATED")
    @NotNull
    private boolean activated;

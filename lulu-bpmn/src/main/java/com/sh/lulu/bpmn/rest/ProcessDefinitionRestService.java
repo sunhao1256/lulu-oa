@@ -1,4 +1,4 @@
-package com.sh.lulu.api.rest;
+package com.sh.lulu.bpmn.rest;
 
 import com.sh.lulu.auth.security.repository.UserRepository;
 import lombok.AllArgsConstructor;

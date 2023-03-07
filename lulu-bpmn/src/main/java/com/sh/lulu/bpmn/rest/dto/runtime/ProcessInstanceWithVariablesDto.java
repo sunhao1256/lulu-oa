@@ -1,6 +1,5 @@
-package com.sh.lulu.api.rest.dto.runtime;
+package com.sh.lulu.bpmn.rest.dto.runtime;
 
-import lombok.Data;
 import lombok.Getter;
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 import org.camunda.bpm.engine.runtime.ProcessInstanceWithVariables;

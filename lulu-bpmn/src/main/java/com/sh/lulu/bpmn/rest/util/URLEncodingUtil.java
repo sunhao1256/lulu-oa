@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.sh.lulu.api.rest.util;
+package com.sh.lulu.bpmn.rest.util;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;

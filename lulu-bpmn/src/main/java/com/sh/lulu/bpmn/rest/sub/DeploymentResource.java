@@ -1,8 +1,8 @@
-package com.sh.lulu.api.rest.sub;
+package com.sh.lulu.bpmn.rest.sub;
 
 
-import com.sh.lulu.api.rest.dto.repository.DeploymentDto;
-import com.sh.lulu.api.rest.dto.repository.DeploymentResourceDto;
+import com.sh.lulu.bpmn.rest.dto.repository.DeploymentDto;
+import com.sh.lulu.bpmn.rest.dto.repository.DeploymentResourceDto;
 import com.sh.lulu.common.response.CommonResult;
 import lombok.AllArgsConstructor;
 import org.camunda.bpm.engine.RepositoryService;

@@ -4,6 +4,9 @@ spring:
     username: root
     password: sunhao123
     driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jackson:
+    date-format: yyyy-MM-DD HH:mm:ss
 camunda:
   bpm:
     history-level: audit

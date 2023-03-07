@@ -1,13 +1,13 @@
-package com.sh.lulu.api.rest.dto.runtime;
+package com.sh.lulu.bpmn.rest.dto.runtime;
 
+import com.sh.lulu.bpmn.rest.dto.VariableValueDto;
 import lombok.Data;
 
-import java.util.List;
 import java.util.Map;
 
 @Data
 public class StartProcessInstanceDto {
-    protected Map<String,Object> variables;
+    protected Map<String, VariableValueDto> variables;
     protected String businessKey;
     protected String caseInstanceId;
     protected boolean skipCustomListeners;

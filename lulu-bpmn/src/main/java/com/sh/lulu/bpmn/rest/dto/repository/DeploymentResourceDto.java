@@ -1,4 +1,4 @@
-package com.sh.lulu.api.rest.dto.repository;
+package com.sh.lulu.bpmn.rest.dto.repository;
 
 import lombok.Data;
 import org.camunda.bpm.engine.repository.Resource;

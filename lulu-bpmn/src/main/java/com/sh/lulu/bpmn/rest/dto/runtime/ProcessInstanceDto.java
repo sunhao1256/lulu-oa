@@ -1,4 +1,4 @@
-package com.sh.lulu.api.rest.dto.runtime;
+package com.sh.lulu.bpmn.rest.dto.runtime;
 
 import org.camunda.bpm.engine.runtime.ProcessInstance;
 

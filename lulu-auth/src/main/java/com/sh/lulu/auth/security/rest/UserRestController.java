@@ -4,6 +4,7 @@ import com.sh.lulu.auth.security.SecurityUtils;
 import com.sh.lulu.auth.security.model.Token;
 import com.sh.lulu.auth.security.model.User;
 import com.sh.lulu.auth.security.repository.TokenRepository;
+import com.sh.lulu.auth.security.repository.UserRepository;
 import com.sh.lulu.auth.security.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +19,16 @@ import java.util.List;
 @AllArgsConstructor
 public class UserRestController {
 
-   private final UserService userService;
-   private final TokenRepository tokenRepository;
+    private final UserService userService;
+    private final UserRepository userRepository;
 
-   @GetMapping("/user")
-   public ResponseEntity<User> getActualUser() {
-      return ResponseEntity.ok(userService.getUserWithAuthorities().get());
-   }
+    @GetMapping("/user")
+    public ResponseEntity<User> getActualUser() {
+        return ResponseEntity.ok(userService.getUserWithAuthorities().get());
+    }
+
+    @GetMapping("/users")
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
 }
