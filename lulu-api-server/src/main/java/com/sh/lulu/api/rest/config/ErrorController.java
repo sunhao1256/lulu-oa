@@ -1,10 +1,10 @@
 package com.sh.lulu.api.rest.config;
 
 import com.sh.lulu.common.response.CommonResult;
+import org.apache.commons.beanutils.ConvertUtilsBean;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
-import org.springframework.cglib.beans.BeanMap;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;

@@ -10,11 +10,18 @@ configurations {
 
 dependencies {
     implementation platform(project(':lulu-bom'))
-    implementation 'com.google.guava:guava'
-    implementation 'org.projectlombok:lombok'
-    implementation 'org.apache.commons:commons-lang3'
-
     annotationProcessor platform(project(':lulu-bom'))
+    api 'com.google.guava:guava'
+    api 'org.projectlombok:lombok'
+    api 'org.apache.commons:commons-lang3'
+    api 'commons-beanutils:commons-beanutils'
+
+    //lombok
     compileOnlyApi 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    //querydsl
+    api group: "com.querydsl", name: "querydsl-apt", classifier: "jpa"
+    api 'org.springframework.boot:spring-boot-starter-data-jpa'
+
 }

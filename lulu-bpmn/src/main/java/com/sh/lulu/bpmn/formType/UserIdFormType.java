@@ -7,8 +7,6 @@ import com.sh.lulu.bpmn.valueType.UserType;
 import lombok.AllArgsConstructor;
 import org.camunda.bpm.engine.ProcessEngineException;
 import org.camunda.bpm.engine.impl.form.type.AbstractFormFieldType;
-import org.camunda.bpm.engine.variable.Variables;
-import org.camunda.bpm.engine.variable.type.ValueType;
 import org.camunda.bpm.engine.variable.value.TypedValue;
 import org.springframework.stereotype.Component;
 
@@ -42,7 +40,7 @@ public class UserIdFormType extends AbstractFormFieldType {
             return new UserValue(null,userType);
         }
         try {
-            Optional<User> byId = userRepository.findById(Long.parseLong(propertyValue.getValue().toString()));
+            Optional<User> byId = userRepository.findById(propertyValue.getValue().toString());
             if (byId.isPresent()) {
                 return new UserValue(byId.get(), userType);
             } else {
@@ -55,7 +53,7 @@ public class UserIdFormType extends AbstractFormFieldType {
 
     @Override
     public Object convertFormValueToModelValue(Object propertyValue) {
-        return userRepository.findById(Long.parseLong(propertyValue.toString()))
+        return userRepository.findById(propertyValue.toString())
                 .orElse(null);
     }
 
@@ -63,7 +61,7 @@ public class UserIdFormType extends AbstractFormFieldType {
     public String convertModelValueToFormValue(Object modelValue) {
         return Optional.ofNullable(modelValue).map(i -> {
             User u = (User) modelValue;
-            return u.getId().toString();
+            return u.getId();
         }).orElse(null);
     }
 }

@@ -1,10 +1,7 @@
 package com.sh.lulu.bpmn.serializer;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sh.lulu.auth.security.repository.UserRepository;
 import com.sh.lulu.bpmn.typevalue.UserValue;
-import com.sh.lulu.bpmn.valueType.UserType;
 import org.camunda.bpm.engine.impl.variable.serializer.AbstractTypedValueSerializer;
 import org.camunda.bpm.engine.impl.variable.serializer.ValueFields;
 import org.camunda.bpm.engine.variable.impl.value.UntypedValueImpl;
@@ -33,13 +30,13 @@ public class UserSerializer extends AbstractTypedValueSerializer<UserValue> {
 
     @Override
     public void writeValue(UserValue value, ValueFields valueFields) {
-        valueFields.setLongValue(value.getValue().getId());
+        valueFields.setTextValue(value.getValue().getId());
     }
 
     @Override
     public UserValue readValue(ValueFields valueFields, boolean deserializeValue, boolean isTransient) {
-        Long longValue = valueFields.getLongValue();
-        return new UserValue(userRepository.findById(longValue).get(),valueType);
+        String id = valueFields.getTextValue();
+        return new UserValue(userRepository.findById(id).get(), valueType);
     }
 
     @Override

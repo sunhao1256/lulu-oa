@@ -1,5 +1,6 @@
 package com.sh.lulu.bpmn;
 
+import com.sh.lulu.api.ApiServer;
 import org.camunda.bpm.engine.FormService;
 import org.camunda.bpm.engine.TaskService;
 import org.camunda.bpm.engine.form.StartFormData;
@@ -18,9 +19,7 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
-@SpringBootTest
-@EnableJpaRepositories(basePackages = "com.sh.lulu")
-@EntityScan(basePackages = "com.sh.lulu")
+@SpringBootTest(classes = ApiServer.class)
 public class TaskTest {
     private final Logger logger = LoggerFactory.getLogger("taskTest");
     @Autowired
