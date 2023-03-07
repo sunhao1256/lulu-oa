@@ -15,8 +15,4 @@ public interface UserRepository extends JpaRepository<User,String> , QuerydslPre
 
    @EntityGraph(attributePaths = "authorities")
    Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
-
-   @Transactional
-   int deleteByCreateByIs(String creator);
-
 }

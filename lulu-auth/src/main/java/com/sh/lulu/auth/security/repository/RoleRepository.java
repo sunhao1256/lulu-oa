@@ -7,6 +7,4 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.transaction.annotation.Transactional;
 
 public interface RoleRepository extends JpaRepository<Role, String> , QuerydslPredicateExecutor<Role> {
-    @Transactional
-    int deleteByCreateByIs(String creator);
 }
