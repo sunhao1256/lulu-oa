@@ -10,9 +10,9 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User,String> , QuerydslPredicateExecutor<User> {
 
-   @EntityGraph(attributePaths = "authorities")
-   Optional<User> findOneWithAuthoritiesByUsername(String username);
+   @EntityGraph(attributePaths = "roles")
+   Optional<User> findOneWithRolesByUsername(String username);
 
-   @EntityGraph(attributePaths = "authorities")
-   Optional<User> findOneWithAuthoritiesByEmailIgnoreCase(String email);
+   @EntityGraph(attributePaths = "roles")
+   Optional<User> findOneWithRolesByEmailIgnoreCase(String email);
 }

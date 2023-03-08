@@ -2,48 +2,42 @@ package com.sh.lulu;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.sh.lulu.api.ApiServer;
-import com.sh.lulu.auth.security.model.QRole;
-import com.sh.lulu.auth.security.model.QUser;
-import com.sh.lulu.auth.security.model.Role;
-import com.sh.lulu.auth.security.model.User;
+import com.sh.lulu.auth.security.model.*;
+import com.sh.lulu.auth.security.model.enums.Gender;
+import com.sh.lulu.auth.security.model.enums.UserStatus;
+import com.sh.lulu.auth.security.repository.MenuRepository;
 import com.sh.lulu.auth.security.repository.RoleRepository;
 import com.sh.lulu.auth.security.repository.UserRepository;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.annotation.Commit;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.TransactionManager;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.Query;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Set;
+import java.text.ParseException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @SpringBootTest(classes = ApiServer.class)
-public class AuthTest {
+public class AuthInitial {
     @Autowired
     RoleRepository roleRepository;
     @Autowired
     UserRepository userRepository;
     @Autowired
     JPAQueryFactory jpaQueryFactory;
+    @Autowired
+    MenuRepository menuRepository;
 
     @BeforeEach
     public void authenticate() {
         String creator = "test";
         SecurityContextHolder.getContext()
                 .setAuthentication(new UsernamePasswordAuthenticationToken(creator, ""));
-
-
         Set<String> ids = jpaQueryFactory.selectFrom(QUser.user)
                 .where(QUser.user.createBy.eq(creator))
                 .fetch()
@@ -53,11 +47,15 @@ public class AuthTest {
                 .where(QRole.role.createBy.eq(creator))
                 .fetch()
                 .stream().map(Role::getId).collect(Collectors.toSet()));
+        menuRepository.deleteAllById(jpaQueryFactory.selectFrom(QMenu.menu)
+                .where(QMenu.menu.createBy.eq(creator))
+                .fetch()
+                .stream().map(Menu::getId).collect(Collectors.toSet()));
     }
 
 
     @Test
-    public void DeleteUser(){
+    public void DeleteUser() {
     }
 
     @Test
@@ -72,11 +70,33 @@ public class AuthTest {
     PasswordEncoder passwordEncoder;
 
     @Test
-    public void initialize() {
+    public void initialize() throws ParseException {
+
+        Menu dashboard = Menu.builder().name("dashboard")
+                .path("/dashboard")
+                .component("basic")
+                .meta(Menu.Meta.builder()
+                        .title("menu.dashboard")
+                        .order(1)
+                        .requiresAuth(true)
+                        .icon("mdi-view-dashboard-outline")
+                        .build())
+                .build();
+
+
+        menuRepository.saveAll(Arrays.asList(dashboard));
 
         Role adminRole = Role.builder().name("admin").build();
+
+        adminRole.setMenus(Set.of(dashboard));
+
         Role userRole = Role.builder().name("user").build();
+
+        userRole.setMenus(Set.of(dashboard));
+
         roleRepository.saveAll(Arrays.asList(adminRole, userRole));
+
+
         String pass = passwordEncoder.encode("123456");
 
         User admin = User.builder()
@@ -86,7 +106,9 @@ public class AuthTest {
                 .lastname("silva")
                 .email("franksilva@gmail.com")
                 .contactDigit("0517-82312806")
-                .activated(true)
+                .gender(Gender.MALE)
+                .birth(DateUtils.parseDate("1996-12-16", "yyyy-MM-DD"))
+                .status(UserStatus.ACTIVE)
                 .roles(Set.of(adminRole))
                 .build();
 
@@ -96,11 +118,14 @@ public class AuthTest {
                 .password(pass)
                 .lastname("lu")
                 .email("lulu@gmail.com")
+                .gender(Gender.FEMALE)
                 .contactDigit("+86 18601487808")
-                .activated(true)
+                .status(UserStatus.DISABLED)
                 .roles(Set.of(userRole))
                 .build();
 
         userRepository.saveAll(Arrays.asList(admin, user));
     }
+
+
 }

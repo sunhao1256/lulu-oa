@@ -1,15 +1,20 @@
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  redis:
+    host: localhost
+    port: 6379
+    password: sunhao123
   datasource:
     url: jdbc:mysql://localhost:3306/lulu_oa?nullCatalogMeansCurrent=true
     username: root
     password: sunhao123
     driver-class-name: com.mysql.cj.jdbc.Driver
-
   jackson:
     date-format: yyyy-MM-DD HH:mm:ss
-camunda:
-  bpm:
-    history-level: audit
+
 server:
   port: 9902
 

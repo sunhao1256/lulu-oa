@@ -35,4 +35,11 @@ public class UserQSLTest {
         Assertions.assertNull(hello);
     }
 
+    @Test
+    public void lazyRetchRole(){
+        String username = "admin";
+        Optional<User> one = userRepository.findOne(QUser.user.username.eq(username));
+        User user = one.get();
+        Assertions.assertNotNull(user);
+    }
 }

@@ -1,7 +1,10 @@
 package com.sh.lulu.api.rest.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sh.lulu.common.response.CommonResult;
+import lombok.AllArgsConstructor;
 import org.apache.commons.beanutils.ConvertUtilsBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
 import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
@@ -16,6 +19,8 @@ import java.util.Map;
 
 @RestController
 public class ErrorController extends BasicErrorController {
+    @Autowired
+    ObjectMapper objectMapper;
 
     public ErrorController() {
         super(new DefaultErrorAttributes(), new ErrorProperties());
@@ -26,6 +31,7 @@ public class ErrorController extends BasicErrorController {
 
     @Override
     @RequestMapping(value = "", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @SuppressWarnings("unchecked")
     public ResponseEntity<Map<String, Object>> error(HttpServletRequest request) {
         Map<String, Object> body = getErrorAttributes(request, getErrorAttributeOptions(request, MediaType.ALL));
         String message = body.get("message").toString();

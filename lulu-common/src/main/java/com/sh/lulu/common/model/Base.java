@@ -1,4 +1,4 @@
-package com.sh.lulu.auth.model;
+package com.sh.lulu.common.model;
 
 
 import lombok.Data;
@@ -10,7 +10,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -23,25 +22,21 @@ public class Base {
     @GenericGenerator(name = "uuid", strategy = "org.hibernate.id.UUIDGenerator")
     private String id;
 
-    @Column(name = "CREATE_BY")
+    @Column(name = "CREATE_BY", nullable = false)
     @CreatedBy
-    @NotNull
     private String createBy;
 
 
-    @Column(name = "MODIFY_BY")
+    @Column(name = "MODIFY_BY", nullable = false)
     @LastModifiedBy
-    @NotNull
     private String modifyBy;
 
-    @Column(name = "CREATE_TIME")
+    @Column(name = "CREATE_TIME", nullable = false)
     @CreatedDate
-    @NotNull
     private Date createTime;
 
 
-    @Column(name = "MODIFY_TIME")
+    @Column(name = "MODIFY_TIME", nullable = false)
     @LastModifiedDate
-    @NotNull
     private Date modifyTime;
 }

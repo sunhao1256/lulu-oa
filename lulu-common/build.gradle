@@ -23,5 +23,12 @@ dependencies {
     //querydsl
     api group: "com.querydsl", name: "querydsl-apt", classifier: "jpa"
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
+    annotationProcessor group: "com.querydsl", name: "querydsl-apt", classifier: "jpa"
+    annotationProcessor 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //jackson
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+    implementation 'com.fasterxml.jackson.core:jackson-core'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations'
 
 }

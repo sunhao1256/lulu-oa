@@ -52,12 +52,14 @@ public class UserIdFormType extends AbstractFormFieldType {
     }
 
     @Override
+    @Deprecated
     public Object convertFormValueToModelValue(Object propertyValue) {
         return userRepository.findById(propertyValue.toString())
                 .orElse(null);
     }
 
     @Override
+    @Deprecated
     public String convertModelValueToFormValue(Object modelValue) {
         return Optional.ofNullable(modelValue).map(i -> {
             User u = (User) modelValue;
