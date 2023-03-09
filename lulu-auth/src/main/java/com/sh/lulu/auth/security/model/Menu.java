@@ -2,8 +2,9 @@ package com.sh.lulu.auth.security.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sh.lulu.common.model.Base;
-import com.sh.lulu.common.modeCoverter.Object2Json;
+import com.sh.lulu.common.modeConvertor.Object2Json;
 import lombok.*;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -50,10 +51,11 @@ public class Menu extends Base {
         private String icon;
     }
 
-    static public class MetaConverter extends Object2Json {
+    @Converter(autoApply = true)
+    static public class MetaConverter extends Object2Json<Meta> {
 
         @Override
-        public Object convertToEntityAttribute(String dbData) {
+        public Meta convertToEntityAttribute(String dbData) {
             try {
                 return objectMapper.readValue(dbData, Meta.class);
             } catch (JsonProcessingException e) {

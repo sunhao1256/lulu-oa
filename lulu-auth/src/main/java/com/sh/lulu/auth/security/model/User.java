@@ -24,7 +24,7 @@ import java.util.Set;
 
 @NamedEntityGraph(
         name = "roles-menus",
-        attributeNodes = @NamedAttributeNode(value = "roles",subgraph = "menus"),
+        attributeNodes = @NamedAttributeNode(value = "roles", subgraph = "menus"),
         subgraphs = @NamedSubgraph(
                 name = "menus", attributeNodes = @NamedAttributeNode(value = "menus"))
 
@@ -58,12 +58,12 @@ public class User extends Base {
     private String contactDigit;
 
     @Column(name = "STATUS", nullable = false)
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = UserStatus.UserStatusConverted.class)
     private UserStatus status;
 
     @Column(name = "GENDER", nullable = false)
-    @Enumerated(EnumType.STRING)
     @Builder.Default
+    @Convert(converter = Gender.GenderConverter.class)
     private Gender gender = Gender.UNKNOWN;
 
     @Column(name = "BIRTH")
