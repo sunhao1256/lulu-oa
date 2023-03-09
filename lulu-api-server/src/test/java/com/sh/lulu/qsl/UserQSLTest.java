@@ -42,4 +42,22 @@ public class UserQSLTest {
         User user = one.get();
         Assertions.assertNotNull(user);
     }
+
+
+    @Test
+    public void relationShipQueryWithDSL(){
+        String username  = "admin";
+        User user = jpaQueryFactory
+                .selectFrom(QUser.user)
+                .leftJoin(QUser.user.roles)
+                .where(QUser.user.username.eq(username))
+                .fetchOne();
+        Assertions.assertNotNull(user);
+    }
+    @Test
+    public void relationShipQueryWithEntityGraph(){
+        String username  = "admin";
+        User user = userRepository.findOneWithRolesByUsername(username).get();
+        Assertions.assertNotNull(user);
+    }
 }

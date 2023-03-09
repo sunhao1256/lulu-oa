@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User,String> , QuerydslPredicateExecutor<User> {
+public interface UserRepository extends JpaRepository<User, String>, QuerydslPredicateExecutor<User> {
 
-   @EntityGraph(attributePaths = "roles")
-   Optional<User> findOneWithRolesByUsername(String username);
+    @EntityGraph(value = "roles-menus")
+    Optional<User> findOneWithRolesByUsername(String username);
 
-   @EntityGraph(attributePaths = "roles")
-   Optional<User> findOneWithRolesByEmailIgnoreCase(String email);
+    @EntityGraph(value = "roles-menus")
+    Optional<User> findOneWithRolesByEmailIgnoreCase(String email);
 }

@@ -82,13 +82,24 @@ public class AuthInitial {
                         .icon("mdi-view-dashboard-outline")
                         .build())
                 .build();
-
-
         menuRepository.saveAll(Arrays.asList(dashboard));
+
+        Menu dashboardAnalyse = Menu.builder().name("dashboard_analytics")
+                .path("/dashboard/analytics")
+                .component("self")
+                .parent(dashboard.getId())
+                .meta(Menu.Meta.builder()
+                        .title("menu.dashboard")
+                        .requiresAuth(true)
+                        .icon("mdi-view-dashboard-outline")
+                        .build())
+                .build();
+
+        menuRepository.saveAll(Arrays.asList(dashboardAnalyse));
 
         Role adminRole = Role.builder().name("admin").build();
 
-        adminRole.setMenus(Set.of(dashboard));
+        adminRole.setMenus(Set.of(dashboard, dashboardAnalyse));
 
         Role userRole = Role.builder().name("user").build();
 

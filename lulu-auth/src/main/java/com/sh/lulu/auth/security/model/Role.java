@@ -1,5 +1,6 @@
 package com.sh.lulu.auth.security.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sh.lulu.common.model.Base;
 import lombok.*;
 import org.hibernate.annotations.BatchSize;
@@ -15,6 +16,7 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class Role extends Base {
 
     @Column(name = "NAME", length = 50, unique = true, nullable = false)
@@ -27,5 +29,8 @@ public class Role extends Base {
             joinColumns = {@JoinColumn(name = "MENU_ID", referencedColumnName = "ID", table = "MENU")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", table = "ROLE")})
     @BatchSize(size = 40)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
+    @JsonIgnore
     private Set<Menu> menus;
 }

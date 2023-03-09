@@ -6,6 +6,7 @@ import com.sh.lulu.common.modeCoverter.Object2Json;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 @Entity
@@ -32,6 +33,9 @@ public class Menu extends Base {
     @Column(name = "META", nullable = false)
     @Convert(converter = MetaConverter.class)
     private Meta meta;
+
+    @Transient
+    private Set<Menu> children;
 
 
     @Builder

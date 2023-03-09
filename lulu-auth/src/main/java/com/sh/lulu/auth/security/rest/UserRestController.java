@@ -23,8 +23,8 @@ public class UserRestController {
     private final UserRepository userRepository;
 
     @GetMapping("/user")
-    public ResponseEntity<User> getActualUser() {
-        return ResponseEntity.ok(userService.getUserWithAuthorities().get());
+    public User getActualUser() {
+        return userService.getUserWithAuthorities().get();
     }
 
     @GetMapping("/users")

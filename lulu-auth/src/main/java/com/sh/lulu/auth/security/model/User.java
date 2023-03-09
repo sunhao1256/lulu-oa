@@ -21,6 +21,14 @@ import java.util.Set;
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+
+@NamedEntityGraph(
+        name = "roles-menus",
+        attributeNodes = @NamedAttributeNode(value = "roles",subgraph = "menus"),
+        subgraphs = @NamedSubgraph(
+                name = "menus", attributeNodes = @NamedAttributeNode(value = "menus"))
+
+)
 public class User extends Base {
 
     @Column(name = "USERNAME", length = 50, unique = true, nullable = false)
@@ -68,13 +76,13 @@ public class User extends Base {
     private Date lastSignIn;
 
     @ManyToMany
-    // avoid fetch role and menu when query userList
-    @JsonIgnore
     @JoinTable(
             name = "USER_ROLE",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID", table = "USER")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", table = "ROLE")})
     @BatchSize(size = 20)
+    @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     private Set<Role> roles;
 
 
