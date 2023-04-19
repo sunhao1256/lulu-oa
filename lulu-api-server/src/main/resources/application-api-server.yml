@@ -8,7 +8,8 @@ spring:
     port: 6379
     password: sunhao123
   datasource:
-    url: jdbc:mysql://localhost:3306/lulu_oa?nullCatalogMeansCurrent=true
+#    url: jdbc:mysql://localhost:3306/lulu_oa?nullCatalogMeansCurrent=true
+    url: jdbc:mysql://localhost:3306/camunda_demo?nullCatalogMeansCurrent=true
     username: root
     password: sunhao123
     driver-class-name: com.mysql.cj.jdbc.Driver

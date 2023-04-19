@@ -8,6 +8,7 @@ import org.camunda.bpm.engine.variable.impl.value.UntypedValueImpl;
 import org.camunda.bpm.engine.variable.type.ValueType;
 import org.camunda.bpm.engine.variable.value.TypedValue;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 
 @Component
 public class UserSerializer extends AbstractTypedValueSerializer<UserValue> {
@@ -36,6 +37,10 @@ public class UserSerializer extends AbstractTypedValueSerializer<UserValue> {
     @Override
     public UserValue readValue(ValueFields valueFields, boolean deserializeValue, boolean isTransient) {
         String id = valueFields.getTextValue();
+        if(ObjectUtils.isEmpty(id))
+        {
+            return new UserValue(null,valueType);
+        }
         return new UserValue(userRepository.findById(id).get(), valueType);
     }
 
