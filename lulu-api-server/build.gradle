@@ -26,3 +26,37 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+def host = "registry.cn-hangzhou.aliyuncs.com/sunhao1256"
+tasks.named('bootBuildImage') {
+    imageName = "${host}/${project.name}"
+    environment["BP_JVM_VERSION"] = "11"
+    environment["BPE_OVERRIDE_BPL_JVM_THREAD_COUNT"] = "30"
+    environment["BPE_DELIM_JAVA_TOOL_OPTIONS"] = " "
+    environment["BPE_APPEND_JAVA_TOOL_OPTIONS"] = '''
+-XX:+HeapDumpOnOutOfMemoryError
+-XX:ReservedCodeCacheSize=16M -XX:MaxDirectMemorySize=16M 
+-Dspring.profiles.active=pro
+-Xmx100M
+'''
+    buildCache {
+        volume {
+            name = "cache-${rootProject.name}.build"
+        }
+    }
+    publish = true
+    docker {
+        publishRegistry {
+            username = "sunhao1256"
+            password = "sunhao123"
+        }
+    }
+    launchCache {
+        volume {
+            name = "cache-${rootProject.name}.launch"
+        }
+    }
+    bindings = [
+            "${rootDir}/bindings/bellsoft-jdk-config:/platform/bindings/bellsoft-jdk-config"
+    ]
+}
