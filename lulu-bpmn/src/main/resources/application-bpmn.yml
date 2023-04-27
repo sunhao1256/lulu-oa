@@ -1,3 +1,7 @@
 camunda:
+  url: http://localhost:9903
   bpm:
     history-level: audit
+    process-engine-name: bpmn
+    webapp:
+      application-path: /camunda

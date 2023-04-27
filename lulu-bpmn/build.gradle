@@ -25,5 +25,5 @@ dependencies {
     implementation project(':lulu-common')
     annotationProcessor project(':lulu-common')
 
-    api 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter'
+    api 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp-core'
 }

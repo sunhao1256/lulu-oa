@@ -4,4 +4,5 @@ include 'lulu-common'
 include 'lulu-api-server'
 include 'lulu-bpmn'
 include 'lulu-auth'
+include 'lulu-camunda-api-server'
 
