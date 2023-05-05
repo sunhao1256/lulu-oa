@@ -77,9 +77,8 @@
           <entry name="$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.sun.istack/istack-commons-runtime/3.0.12/cbbe1a62b0cc6c85972e99d52aaee350153dc530/istack-commons-runtime-3.0.12.jar" />
         </processorPath>
         <module name="lulu-oa.lulu-bpmn.main" />
-        <module name="lulu-oa.lulu-auth.main" />
-        <module name="lulu-oa.lulu-camunda-api-server.main" />
         <module name="lulu-oa.lulu-api-server.main" />
+        <module name="lulu-oa.lulu-auth.main" />
       </profile>
       <profile name="Gradle Imported" enabled="true">
         <outputRelativeToContentRoot value="true" />

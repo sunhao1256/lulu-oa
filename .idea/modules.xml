@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lulu-api-server/lulu-oa.lulu-api-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lulu-api-server/lulu-oa.lulu-api-server.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lulu-auth/lulu-oa.lulu-auth.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lulu-auth/lulu-oa.lulu-auth.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lulu-bpmn/lulu-oa.lulu-bpmn.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lulu-bpmn/lulu-oa.lulu-bpmn.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/lulu-camunda-api-server/lulu-oa.lulu-camunda-api-server.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lulu-camunda-api-server/lulu-oa.lulu-camunda-api-server.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/lulu-common/lulu-oa.lulu-common.main.iml" filepath="$PROJECT_DIR$/.idea/modules/lulu-common/lulu-oa.lulu-common.main.iml" />
     </modules>
   </component>

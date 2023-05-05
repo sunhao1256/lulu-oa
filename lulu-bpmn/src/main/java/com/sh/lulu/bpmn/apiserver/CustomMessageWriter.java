@@ -3,6 +3,7 @@ package com.sh.lulu.bpmn.apiserver;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sh.lulu.common.response.CommonResult;
 
+import javax.inject.Inject;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
@@ -17,6 +18,13 @@ import java.lang.reflect.Type;
 @Provider
 @Produces("application/json")
 public class CustomMessageWriter implements MessageBodyWriter<Object> {
+    private final ObjectMapper objectMapper;
+
+    @Inject
+    public CustomMessageWriter(ObjectMapper objectMapper) {
+        this.objectMapper = objectMapper;
+    }
+
     @Override
     public boolean isWriteable(Class type, Type genericType, Annotation[] annotations, MediaType mediaType) {
         return mediaType.equals(MediaType.APPLICATION_JSON_TYPE);
@@ -29,6 +37,6 @@ public class CustomMessageWriter implements MessageBodyWriter<Object> {
         if (!CommonResult.class.isAssignableFrom(type)) {
             result = CommonResult.success(o);
         }
-        new ObjectMapper().writer().writeValue(entityStream, result);
+        objectMapper.writer().writeValue(entityStream, result);
     }
 }

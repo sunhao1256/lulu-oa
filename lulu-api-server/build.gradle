@@ -30,9 +30,16 @@ test {
 def host = "registry.cn-hangzhou.aliyuncs.com/sunhao1256"
 tasks.named('bootBuildImage') {
     imageName = "${host}/${project.name}"
+    builder = "paketobuildpacks/builder:0.3.215-base"
+    pullPolicy= "IF_NOT_PRESENT"
+    //jre 11.0.18
     environment["BP_JVM_VERSION"] = "11"
+    environment["BP_ENABLE_RUNTIME_CERT_BINDING"] = 'false'
     environment["BPE_OVERRIDE_BPL_JVM_THREAD_COUNT"] = "30"
     environment["BPE_DELIM_JAVA_TOOL_OPTIONS"] = " "
+
+
+//    diminish memory usage of jvm
     environment["BPE_APPEND_JAVA_TOOL_OPTIONS"] = '''
 -XX:+HeapDumpOnOutOfMemoryError
 -XX:ReservedCodeCacheSize=16M -XX:MaxDirectMemorySize=16M 
@@ -47,8 +54,8 @@ tasks.named('bootBuildImage') {
     publish = true
     docker {
         publishRegistry {
-            username = "sunhao1256"
-            password = "sunhao123"
+            username = "$System.env.RegistryUser"
+            password = "$System.env.RegistryPass"
         }
     }
     launchCache {
