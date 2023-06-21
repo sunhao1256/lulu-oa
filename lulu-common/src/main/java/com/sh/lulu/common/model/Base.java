@@ -2,6 +2,8 @@ package com.sh.lulu.common.model;
 
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -14,7 +16,9 @@ import java.util.Date;
 
 @Data
 @MappedSuperclass
+@SuperBuilder
 @EntityListeners(AuditingEntityListener.class)
+@NoArgsConstructor
 public class Base {
     @Id
     @Column(name = "ID")

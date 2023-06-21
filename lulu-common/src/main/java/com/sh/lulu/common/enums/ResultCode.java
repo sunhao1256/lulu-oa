@@ -13,13 +13,15 @@ public enum  ResultCode implements IErrorCode{
 
     UNAUTHORIZED(401, "unauthorized"),
 
-    FORBIDDEN(403, "forbidden");
+    FORBIDDEN(403, "forbidden"),
 
-    private final long code;
+    NOT_FOUND(404, "not found");
+
+    private final int code;
 
     private final String message;
 
-    ResultCode(long code,String message) {
+    ResultCode(int code,String message) {
         this.code = code;
         this.message=message;
     }

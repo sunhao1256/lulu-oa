@@ -7,6 +7,7 @@ import com.sh.lulu.auth.security.model.enums.Gender;
 import com.sh.lulu.auth.security.model.enums.UserStatus;
 import com.sun.istack.NotNull;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
@@ -17,9 +18,9 @@ import java.util.Set;
 @Entity
 @Table(name = "USER")
 @Data
-@Builder
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @AllArgsConstructor
 
 @NamedEntityGraph(
@@ -77,6 +78,8 @@ public class User extends Base {
 
     @ManyToMany
     @JoinTable(
+            foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT),
+            inverseForeignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT),
             name = "USER_ROLE",
             joinColumns = {@JoinColumn(name = "USER_ID", referencedColumnName = "ID", table = "USER")},
             inverseJoinColumns = {@JoinColumn(name = "ROLE_ID", referencedColumnName = "ID", table = "ROLE")})

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.sh.lulu.common.model.Base;
 import com.sh.lulu.common.modeConvertor.Object2Json;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -13,7 +14,7 @@ import java.util.Set;
 @Entity
 @Table(name = "MENU")
 @Data
-@Builder
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor

@@ -3,6 +3,7 @@ package com.sh.lulu.auth.config;
 import com.sh.lulu.auth.security.JwtAccessDeniedHandler;
 import com.sh.lulu.auth.security.JwtAuthenticationEntryPoint;
 import com.sh.lulu.auth.security.jwt.JWTConfigurer;
+import com.sh.lulu.auth.security.jwt.JWTFilter;
 import com.sh.lulu.auth.security.jwt.TokenProvider;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -30,66 +31,69 @@ import java.util.Random;
 @AllArgsConstructor
 public class WebSecurityConfig implements WebSecurityCustomizer {
 
-   private final TokenProvider tokenProvider;
-   private final CorsFilter corsFilter;
-   private final JwtAuthenticationEntryPoint authenticationErrorHandler;
-   private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final TokenProvider tokenProvider;
+    private final CorsFilter corsFilter;
+    private final JwtAuthenticationEntryPoint authenticationErrorHandler;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final AuthBpmnFilter authBpmnFilter;
 
-   @Bean
-   public PasswordEncoder passwordEncoder() {
-      return new BCryptPasswordEncoder();
-   }
-
-
-   @Bean
-   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-      http
-              // we don't need CSRF because our token is invulnerable
-              .csrf().disable()
-
-              .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-
-              .exceptionHandling()
-              .authenticationEntryPoint(authenticationErrorHandler)
-              .accessDeniedHandler(jwtAccessDeniedHandler)
-
-              // create no session
-              .and()
-              .sessionManagement()
-              .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-              .and()
-              .authorizeRequests()
-              .antMatchers("/auth/authenticate","/auth/extend").permitAll()
-              // .antMatchers("/auth/register").permitAll()
-              // .antMatchers("/auth/activate").permitAll()
-              // .antMatchers("/auth/account/reset-password/init").permitAll()
-              // .antMatchers("/auth/account/reset-password/finish").permitAll()
-
-              .anyRequest().authenticated()
-              .and()
-              .apply(securityConfigurerAdapter());
-      return http.build();
-   }
-
-   private JWTConfigurer securityConfigurerAdapter() {
-      return new JWTConfigurer(tokenProvider);
-   }
-
-   @Override
-   public void customize(WebSecurity web) {
-      web.ignoring()
-              .antMatchers(HttpMethod.OPTIONS, "/**");
-   }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 
-   @Configuration
-   public class AuditorConfig implements AuditorAware<Integer> {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                // we don't need CSRF because our token is invulnerable
+                .csrf().disable()
 
-      @Override
-      public Optional<Integer> getCurrentAuditor() {
-         return Optional.of(new Random().nextInt(1000));
-      }
+                .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
 
-   }
+                .exceptionHandling()
+                .authenticationEntryPoint(authenticationErrorHandler)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+
+                // create no session
+                .and()
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+
+                .and()
+                .authorizeRequests()
+                .antMatchers("/auth/authenticate", "/auth/extend").permitAll()
+                // .antMatchers("/auth/register").permitAll()
+                // .antMatchers("/auth/activate").permitAll()
+                // .antMatchers("/auth/account/reset-password/init").permitAll()
+                // .antMatchers("/auth/account/reset-password/finish").permitAll()
+
+                .anyRequest().authenticated()
+                .and()
+                .apply(securityConfigurerAdapter())
+                .and()
+                .addFilterAfter(authBpmnFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
+
+    private JWTConfigurer securityConfigurerAdapter() {
+        return new JWTConfigurer(tokenProvider);
+    }
+
+    @Override
+    public void customize(WebSecurity web) {
+        web.ignoring()
+                .antMatchers(HttpMethod.OPTIONS, "/**");
+    }
+
+
+    @Configuration
+    public class AuditorConfig implements AuditorAware<Integer> {
+
+        @Override
+        public Optional<Integer> getCurrentAuditor() {
+            return Optional.of(new Random().nextInt(1000));
+        }
+
+    }
 }

@@ -21,7 +21,7 @@ public class UserSerializer extends AbstractTypedValueSerializer<UserValue> {
 
     @Override
     protected boolean canWriteValue(TypedValue value) {
-        return true;
+        return false;
     }
 
     @Override
@@ -37,9 +37,8 @@ public class UserSerializer extends AbstractTypedValueSerializer<UserValue> {
     @Override
     public UserValue readValue(ValueFields valueFields, boolean deserializeValue, boolean isTransient) {
         String id = valueFields.getTextValue();
-        if(ObjectUtils.isEmpty(id))
-        {
-            return new UserValue(null,valueType);
+        if (ObjectUtils.isEmpty(id)) {
+            return new UserValue(null, valueType);
         }
         return new UserValue(userRepository.findById(id).get(), valueType);
     }

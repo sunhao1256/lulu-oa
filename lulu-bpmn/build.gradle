@@ -26,4 +26,9 @@ dependencies {
     annotationProcessor project(':lulu-common')
 
     api 'org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp-core'
+
+
+    //querydsl
+    api 'com.querydsl:querydsl-jpa'
+    api 'com.querydsl:querydsl-core'
 }

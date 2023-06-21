@@ -10,6 +10,7 @@ dependencies {
         api 'org.apache.commons:commons-collections4:4.4'
         api 'commons-beanutils:commons-beanutils:1.9.4'
         api "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-webapp-core:${libs.camunda}"
+        api "org.camunda.bpm.springboot:camunda-bpm-spring-boot-starter-rest:${libs.camunda}"
         api "com.querydsl:querydsl-jpa:${libs.querydsl}"
         api "com.querydsl:querydsl-core:${libs.querydsl}"
         api "com.querydsl:querydsl-apt:${libs.querydsl}:jpa"

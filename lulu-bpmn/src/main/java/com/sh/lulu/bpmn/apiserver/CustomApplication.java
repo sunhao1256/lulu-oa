@@ -6,6 +6,7 @@ import org.camunda.bpm.engine.rest.dto.ExceptionDto;
 import org.camunda.bpm.engine.rest.exception.ExceptionHandlerHelper;
 import org.camunda.bpm.tasklist.impl.web.TasklistApplication;
 import org.camunda.bpm.webapp.impl.engine.EngineRestApplication;
+import org.springframework.util.ObjectUtils;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
@@ -59,8 +60,9 @@ public class CustomApplication {
             Response response = ExceptionHandlerHelper.getInstance().getResponse(throwable);
             ExceptionDto dto = (ExceptionDto) response.getEntity();
             CommonResult failed = CommonResult.failed(dto.getMessage());
-            failed.setCode(dto.getCode());
-        return Response.status(response.getStatus()).entity(failed).build();
+            if (!ObjectUtils.isEmpty(dto.getCode()))
+                failed.setCode(dto.getCode());
+            return Response.status(response.getStatus()).entity(failed).build();
         }
     }
 }

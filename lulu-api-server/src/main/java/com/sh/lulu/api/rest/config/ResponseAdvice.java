@@ -2,6 +2,7 @@ package com.sh.lulu.api.rest.config;
 
 import com.sh.lulu.common.response.CommonResult;
 import org.springframework.core.MethodParameter;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.ServerHttpRequest;
@@ -22,8 +23,14 @@ public class ResponseAdvice implements ResponseBodyAdvice {
     @Override
     public Object beforeBodyWrite(Object body, MethodParameter returnType, MediaType selectedContentType, Class selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         if (body instanceof CommonResult) {
+            int code = ((CommonResult<?>) body).getCode();
+            HttpStatus status;
+            if ((status = HttpStatus.resolve(code)) != null) {
+                response.setStatusCode(status);
+            }
             return body;
         }
+
         return CommonResult.success(body);
     }
 }

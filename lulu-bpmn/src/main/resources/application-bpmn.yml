@@ -5,3 +5,5 @@ camunda:
     process-engine-name: bpmn
     webapp:
       application-path: /camunda
+    job-execution:
+      enabled: false
